@@ -9,7 +9,7 @@ COPY pnpm-lock.yaml .
 RUN pnpm fetch
 
 COPY . .
-RUN pnpm install -f --offline
+RUN pnpm install -f
 
 FROM base_builder as fe_builder
 WORKDIR /usr/src/app/packages/hoppscotch-selfhost-web
