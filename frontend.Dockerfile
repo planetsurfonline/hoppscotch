@@ -16,6 +16,17 @@ WORKDIR /usr/src/app/packages/hoppscotch-selfhost-web
 RUN pnpm run generate
 
 FROM caddy:2-alpine as app
+
+ARG VITE_BASE_URL
+ARG VITE_SHORTCODE_BASE_URL
+ARG VITE_ADMIN_URL
+ARG VITE_BACKEND_GQL_URL
+ARG VITE_BACKEND_WS_URL
+ARG VITE_BACKEND_API_URL
+ARG VITE_APP_TOS_LINK
+ARG VITE_APP_PRIVACY_POLICY_LINK
+ARG ENABLE_SUBPATH_BASED_ACCESS
+
 WORKDIR /site
 COPY --from=fe_builder /usr/src/app/packages/hoppscotch-selfhost-web/prod_run.mjs /usr
 COPY --from=fe_builder /usr/src/app/packages/hoppscotch-selfhost-web/selfhost-web.Caddyfile /etc/caddy/selfhost-web.Caddyfile
